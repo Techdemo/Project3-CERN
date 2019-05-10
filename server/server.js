@@ -8,11 +8,17 @@ const io = require("socket.io")(server);
 io.set("origins", "*:*");
 // whenever we receive a `connection` event
 // our async function is then called
+let count = 0
 io.on("connection", socket => {
+    count ++
+    io.sockets.emit('broadcast', count + ' online')
     // we should see this printed out whenever we have
     // a successful connection
-    console.log("Client Successfully Connected");
-
+    console.log("Client Successfully Connected", count);
+    socket.on('disconnect', socket => {
+        count--
+        io.sockets.emit('broadcast', count + ' online')
+    })
     // we then send out a new message to the
     // `chat` channel with "Hello World"
     // Our clientside should be able to see

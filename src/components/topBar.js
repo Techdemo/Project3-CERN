@@ -5,6 +5,11 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { FaUserAlt, FaRegBell } from 'react-icons/fa'
 import ModalButton from './modelButton'
+import PeopleOnline from './peopleOnline'
+
+import Overlay from 'react-bootstrap/Overlay'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Popover from 'react-bootstrap/Popover'
 
 
 class TopBar extends Component {
@@ -17,7 +22,12 @@ class TopBar extends Component {
     }
     const icon = {
       height: '30px',
-      width: '30px'
+      width: '30px',
+    }
+    const bellIcon = {
+      height: '30px',
+      width: '30px',
+      marginLeft: '-2.25em',
     }
 
    return (
@@ -28,20 +38,42 @@ class TopBar extends Component {
     variant="dark"
     >
         <Nav>
+         <ModalButton />
             <Form inline>
             <Form.Control type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-primary">Search</Button>
         </Form>
          <Nav.Link>
-           <ModalButton />
+
          </Nav.Link>
           <Nav.Link>
             <FaUserAlt style={icon} />
           </Nav.Link>
           <Nav.Link>
-            <FaRegBell
-              style={icon} />
+
           </Nav.Link>
+          <Nav.Link>
+             <OverlayTrigger
+              trigger="click"
+              key="bottom"
+              placement='bottom'
+              overlay={
+                <Popover
+                  id={`popover-positioned-bottom`}
+                  title={`Notifications`}
+                  >
+                <strong>New Mention</strong> You have been mention in a new log
+              </Popover>
+               }
+              >
+          <FaRegBell
+              style={bellIcon}
+              trigger="click"
+              id="bell" />
+
+    </OverlayTrigger>
+          </Nav.Link>
+          <PeopleOnline />
         </Nav>
     </Navbar>
 
