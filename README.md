@@ -60,6 +60,7 @@ In je project folder start je de app in development mode met:
 ### `npm start`
 
 
+
 Vervolgens ga je naar http://localhost:3000 in je browser. Create-react-app bevat wat linters en heeft een hot reload in de browser. Webpack wordt gebruik als bundler.
 
 ### `npm test`
